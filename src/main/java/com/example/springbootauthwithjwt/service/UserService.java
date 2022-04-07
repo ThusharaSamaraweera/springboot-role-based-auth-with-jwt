@@ -21,6 +21,13 @@ public class UserService {
   private RoleRepository roleRepository;
 
   public User registerUser(User user){
+    Role role = roleRepository.findById("User").get();
+
+    Set<Role> roles = new HashSet<>();
+    roles.add(role);
+    user.setRole(roles);
+
+    user.setPassword(getEnderedPassword(user.getPassword()));
     return userRepository.save(user);
   }
 

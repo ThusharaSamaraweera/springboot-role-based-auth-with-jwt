@@ -22,7 +22,7 @@ public class UserController {
       userService.initRolesAndUser();
    }
 
-   @PostMapping("/user")
+   @PostMapping("/auth/signup")
    public User registerUser(@RequestBody User user){
       return userService.registerUser(user);
    }
