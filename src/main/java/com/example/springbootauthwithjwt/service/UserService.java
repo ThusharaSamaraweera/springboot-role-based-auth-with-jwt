@@ -5,6 +5,7 @@ import com.example.springbootauthwithjwt.entity.User;
 import com.example.springbootauthwithjwt.repository.RoleRepository;
 import com.example.springbootauthwithjwt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -23,6 +24,9 @@ public class UserService {
     return userRepository.save(user);
   }
 
+  @Autowired
+  public PasswordEncoder passwordEncoder;
+
   public void initRolesAndUser(){
     Role adminRole = new Role();
     adminRole.setRoleName("Admin");
@@ -30,19 +34,22 @@ public class UserService {
     roleRepository.save(adminRole);
 
     Role userRole = new Role();
-    userRole.setRoleName("user");
+    userRole.setRoleName("User");
     userRole.setRoleDescription("User role");
     roleRepository.save(userRole);
 
     User adminUser = new User();
-    adminUser.setId(1);
     adminUser.setUsername("admin1");
     adminUser.setFirstName("admin");
     adminUser.setLastName("admin");
-    adminUser.setPassword("admin123");
+    adminUser.setPassword(getEnderedPassword("admin123"));
     Set<Role> adminRoles = new HashSet<>();
     adminRoles.add(adminRole);
     adminUser.setRole(adminRoles);
     userRepository.save(adminUser);
+  }
+
+  public String getEnderedPassword(String password){
+    return passwordEncoder.encode(password);
   }
 }

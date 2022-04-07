@@ -7,20 +7,10 @@ import java.util.Set;
 public class User {
 
   @Id
-  @GeneratedValue(strategy= GenerationType.AUTO)
-  private int id;
   private String username;
   private String firstName;
   private String lastName;
   private String password;
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public String getUsername() {
     return username;
