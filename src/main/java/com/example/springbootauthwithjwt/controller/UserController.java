@@ -38,4 +38,15 @@ public class UserController {
    public String forUser(){
       return "This URL is only valid for user";
    }
+
+   @GetMapping("/user-and-admin")
+   @PreAuthorize("hasAnyRole('Admin', 'User')")
+   public String forUserAndAdmin(){
+      return "This URL is only for user and admin";
+   }
+
+   @GetMapping("/public")
+   public String forPublic(){
+      return "This URL is public";
+   }
 }

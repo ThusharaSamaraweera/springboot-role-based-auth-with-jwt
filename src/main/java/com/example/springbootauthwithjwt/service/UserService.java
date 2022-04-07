@@ -45,6 +45,7 @@ public class UserService {
     userRole.setRoleDescription("User role");
     roleRepository.save(userRole);
 
+    // create admin user
     User adminUser = new User();
     adminUser.setUsername("admin1");
     adminUser.setFirstName("admin");
